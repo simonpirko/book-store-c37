@@ -12,7 +12,7 @@
 
 <h1>Авторизация</h1>
 
-<form method="post" th:action="@{/auth}" th:object="${ModelAttribute}">
+<form method="post" th:action="@{/user/auth}" th:object="${ModelAttribute}">
     <input type="text" th:field="*{username}"/>
     <input type="password" th:field="*{password}"/>
     <button><input type="submit" value="Submit"/></button>

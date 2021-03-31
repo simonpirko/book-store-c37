@@ -2,12 +2,14 @@ package by.tms.bookstorec37.service;
 
 import by.tms.bookstorec37.entity.User;
 import by.tms.bookstorec37.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public void addUser (User user) {
         userRepository.save(user);

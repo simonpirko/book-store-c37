@@ -12,10 +12,11 @@
 
 <h1>Регистрация</h1>
 
-<form method="post" action="/reg" th:action="@{/reg}" th:object="${ModelAttribute}">
+<form method="post" th:action="@{/user/reg}" th:object="${ModelAttribute}">
         <input type="text" th:field="*{username}"/>
         <input type="password" th:field="*{password}"/>
-    <button><input type="submit" value="Submit"/></button>
+    <button type="submit">Submit</button>
+    <p th:text="${userIsExistsError}" style="color: red"></p>
 </form>
 
 <a th:href="@{/}">На главную страницу</a>
