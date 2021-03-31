@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,8 +20,7 @@ public class Order {
     private long id;
     private OrderStatus orderStatus;
     @OneToMany (cascade = CascadeType.ALL)
-    private List<Book> bookList;
-    private long quantity;
+    private Set<Book> bookList;
     @ManyToOne
     private User user;
 
