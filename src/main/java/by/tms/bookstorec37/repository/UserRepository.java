@@ -5,10 +5,11 @@ import com.zaxxer.hikari.util.ClockSource;
 import net.bytebuddy.asm.Advice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import javax.security.auth.callback.PasswordCallback;
 
-    User getUserByUsername(String username);
-    User getUserById(long id);
+public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsUserByUsername(String username);
     void deleteUserByUsername(String username);
+    User getUserByUsername(String username);
+    User getUserById(long id);
 }
