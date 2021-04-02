@@ -17,8 +17,10 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    private String description;
     @ManyToOne
     private Author author;
+    private double price;
 
 
 }
