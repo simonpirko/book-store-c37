@@ -103,4 +103,8 @@ public class UserService {
             throw new UserNotFoundException("User is not found");
         }
     }
+
+    public boolean isPasswordCorrect(String username, String password) {
+        return getUserByUserName(username).getPassword().equals(password);
+    }
 }
