@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basket</title>
+    <header th:insert="fragments/_header"></header>
+</head>
+<body>
+
+<h3>Basket</h3>
+
+<!--
+Логика:
+1 - заходим в магазин
+
+5 - нажимаем кнопку добавить заказ
+6 - заказ Баскет становится Orderом уходит в контроллер баскета
+6а - меняется статус заказа с NEW на PROCESSED
+7 - заказ становится виден в личном кабинете
+8 - заказ виден в личном кабинете менеджера
+9 - после того, как манагер сменит статус заказа на DELIVERED, баскет должен попасть в базу,
+10 - после помещения в базу баскета у клиента он должен быть удален.
+11 - манагер и клиент должны видеть историю в своих личных кабинетах.
+-->
+
+<!--Сюда надо поместить все позиции из списка книг-->
+<!--Это надо достать из базы данных, где хранятся все баскеты всех юзеров-->
+<!--В таблицу книга попадает из списка всех книг в магазине на отдельной странице-->
+<!--newOrder надо переименовать в basket-->
+
+<!--<tr th:object="${currentUserBasket}">-->
+<!--    <td th:text="*{userId}"></td>-->
+<!--    <td th:each="book : *{bookList}" th:text="${book}">-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<p th:if="${userBasket} != null">-->
+
+<!--    <tr th:object="${userBasket}">-->
+<!--        <p th:if="${userBasket.bookSet} != null">-->
+<!--                <form method="post" th:action="@{/book/removeBookFromBasket}" th:object="${bookToRemoveFromBasket}">-->
+<!--                    <input th:each="book : ${userBasket.bookSet}" th:text="${book.name}" th:field="${bookToRemoveFromBasket.name}" th:value="${book.name}">-->
+<!--                    <button>Удалить из корзины</button>-->
+<!--                    <br>-->
+<!--                </form><br>-->
+<!--            <br>-->
+<!--        </p>-->
+<!--<p th:if="${userBasket.bookSet} == null">-->
+<!--    Корзина пуста-->
+<!--</p>-->
+
+<!--    </tr>-->
+<!--</p>-->
+
+
+
+<tr th:object="${userBasket}">
+    <p th:if="${userBasket.bookSet} != null">
+        <p th:each="book : ${userBasket.bookSet}" th:text="${book.name}">
+        <a th:href="@{book/removeBookFromBasket/__${book.id}__}">Удалить из корзины</a>
+        <br>
+    </p>
+
+    <div th:if="${userBasket.bookSet} == null">
+        <p>Корзина пуста</p>
+    </div>
+
+</tr>
+
+
+    <form method="get" th:action="@{/order/bookShelf}">
+        <input type="submit" value="вернуться к списку">
+    </form>
+
+    <a th:href="@{/}">На главную страницу</a><br>
+
+
+</body>
+</html>

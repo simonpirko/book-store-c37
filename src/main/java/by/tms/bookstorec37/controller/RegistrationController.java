@@ -16,14 +16,14 @@ public class RegistrationController {
 
     @GetMapping(path = "/reg")
     public ModelAndView getRegPage(ModelAndView modelAndView){
-        modelAndView.setViewName("reg");
+        modelAndView.setViewName("/user/reg");
         modelAndView.addObject("ModelAttribute", new User());
         return modelAndView;
     }
 
     @PostMapping(path = "/reg")
     public ModelAndView postRegPage(@ModelAttribute("ModelAttribute")User user, ModelAndView modelAndView){
-        modelAndView.setViewName("reg");
+        modelAndView.setViewName("/user/reg");
         if(!userService.isUserExistByUserName(user.getUsername())){
             userService.addUser(user);
             modelAndView.setViewName("redirect:/user/auth");
@@ -34,8 +34,24 @@ public class RegistrationController {
     }
 
     @GetMapping(path = "/auth")
-    public ModelAndView getAuthPage(ModelAndView modelAndView){
-        modelAndView.setViewName("auth");
+    public ModelAndView getAuthPage(@ModelAttribute("ModelAttribute")User user, ModelAndView modelAndView){
+        modelAndView.setViewName("/user/auth");
+        return modelAndView;
+    }
+
+    @PostMapping(path = "/auth")
+    public ModelAndView postAuthPage(@ModelAttribute("ModelAttribute")User user, ModelAndView modelAndView){
+        modelAndView.setViewName("/user/auth");
+        if(userService.isUserExistByUserName(user.getUsername())) {
+            if (userService.isPasswordCorrect(user.getUsername(), user.getPassword())) {
+                modelAndView.addObject("userAuthOk", "User Authorization Ok");
+                modelAndView.setViewName("redirect:/user/auth");
+            } else {
+                modelAndView.addObject("Password incorrect", "Password incorrect");
+            }
+        } else {
+            modelAndView.addObject("Name incorrect", "Name incorrect");
+        }
         return modelAndView;
     }
 }

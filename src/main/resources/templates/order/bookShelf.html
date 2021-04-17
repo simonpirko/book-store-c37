@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html"
+      lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>BookShelf</title>
+
+    <header th:insert="fragments/_header"></header>
+</head>
+<body>
+
+<h1>Книги в наличии:</h1>
+
+<tr th:each="book : ${tempBooks}">
+
+    <td>
+        <th:block th:text="${tempBooks.indexOf(book) + 1} + '.'"></th:block>
+        <a
+           th:href="@{/book/bookTicket/__${book.id}__}"
+           th:text="'&#34' + ${book.name} + '&#34, ' + ${book.author.name} + ' ' + ${book.author.lastName}">
+        </a>
+    </td>
+    <br>
+</tr>
+<br>
+<a th:href="@{/}">На главную страницу</a><br>
+<a th:href="@{/user/auth}">Авторизация</a><br>
+<a th:href="@{/user/reg}">Регистрация</a><br>
+
+
+
+
+
+<!--<form action="#" th:action="@{/books/save}" th:object="${form}"-->
+<!--      method="post">-->
+<!--    <fieldset>-->
+<!--        <input type="submit" id="submitButton" th:value="Save">-->
+<!--        <input type="reset" id="resetButton" name="reset" th:value="Reset"/>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th> Title</th>-->
+<!--                <th> Author</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="book, itemStat : *{books}">-->
+<!--                <td><input th:field="*{books[__${itemStat.index}__].title}" /></td>-->
+<!--                <td><input th:field="*{books[__${itemStat.index}__].author}" /></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </fieldset>-->
+<!--</form>-->
+
+<a th:href="@{https://www.baeldung.com/thymeleaf-list}"></a>
+
+
+
+</body>
+</html>
